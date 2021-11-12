@@ -1,0 +1,73 @@
+iompórt sdl2
+
+aicme Mandaw:
+    sain __init__(féin, teideal = Neodar, leithead = 800, airde = 600, dath = (0, 0, 0, 255)):
+        féin.teideal = teideal.encode() má teideal eile b"MandawGA"
+        féin.leithead = leithead
+        féin.airde = airde
+        féin.dath = dath
+
+        sdl2.SDL_Init(sdl2.SDL_INIT_EVERYTHING)
+
+        féin.fuinneog = sdl2.SDL_CreateWindow(féin.teideal, sdl2.SDL_WINDOWPOS_CENTERED, sdl2.SDL_WINDOWPOS_CENTERED, féin.leithead, féin.airde, sdl2.SDL_WINDOW_SHOWN)
+        féin.rindreálaí = sdl2.SDL_CreateRenderer(féin.fuinneog, -1, 0)
+
+        féin.ag_rith = 1
+        féin.am_delta = 1.0 / 60.0
+
+        féin.nuashonrú_am_delta = 0
+        féin.nuashonrú_láimhseálaithe = []
+        féin.tarraing_láimhseálaithe = []
+
+    sain _nuashonrú(féin, am_delta):
+        féin.nuashonrú_am_delta += am_delta
+        chomhfada féin.nuashonrú_am_delta > féin.am_delta:
+            do nuashonrú i_ féin.nuashonrú_láimhseálaithe:
+                nuashonrú(féin.am_delta)
+            féin.nuashonrú_am_delta -= féin.am_delta
+
+    sain _tarraing(féin):
+        do tarraing i_ féin.tarraing_láimhseálaithe:
+            tarraing()
+
+    sain rith(féin):
+        sdl2.SDL_ShowWindow(féin.fuinneog)
+
+        current = sdl2.SDL_GetPerformanceCounter()
+        freq = sdl2.SDL_GetPerformanceFrequency()
+
+        imeacht = sdl2.SDL_Event()
+
+        chomhfada féin.ag_rith != 0:
+            chomhfada sdl2.SDL_PollEvent(imeacht) != 0:
+                má imeacht.type == sdl2.SDL_Quit:
+                    féin.ag_rith = 0
+                má imeacht.type == sdl2.SDL_KEYDOWN:
+                    má imeacht.key.keysym.sym == sdl2.SDLK_ESCAPE:
+                        féin.ag_rith = 0
+            
+            nua = sdl2.SDL_GetPerformanceCounter()
+            féin._nuashonrú((nua - current) / freq)
+            current = nua 
+
+            sdl2.SDL_RenderClear(féin.rindreálaí)
+            féin._tarraing()
+            sdl2.SDL_SetRenderDrawColor(féin.rindreálaí, féin.dath[0], féin.dath[1], féin.dath[2], féin.dath[3])
+            sdl2.SDL_RenderPresent(féin.rindreálaí)
+
+        sdl2.SDL_DestroyRenderer(féin.rindreálaí)
+        sdl2.SDL_DestroyWindow(féin.fuinneog)
+        
+        sdl2.SDL_Quit()
+
+    sain tarraing(féin, fn):
+        féin.tarraing_láimhseálaithe.append(fn)
+        return fn
+
+    sain nuashonrú(féin, fn):
+        féin.nuashonrú_láimhseálaithe.append(fn)
+        return fn
+
+má __name__ == "__main__":
+    mandaw = Mandaw()
+    mandaw.rith()
