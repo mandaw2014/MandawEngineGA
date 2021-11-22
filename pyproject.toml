@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "Mandaw (GA)"
+version = "2.0.1"
+description = "MandawEngineSDL written in Irish"
+keywords = [
+    "python",
+    "2d",
+    "game",
+    "development"
+]
+authors = [
+    "mandaw2014 <mandawbuisness@gmail.com>"
+]
+license = "MIT"
+packages = [
+    { include = "mandaw" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+PySDL2 = "^0.9.9"
+# avantpy-extended = { git = "https://github.com/philtweir/avantpy-extended.git", branch = "master" }
+avantpy-extended = { path = "../avantpy-extended", develop = true }
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+black = "^21.10b0"
+
+[tool.poetry.urls]
+url = "https://github.com/mandaw2014/MandawEngineGA"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

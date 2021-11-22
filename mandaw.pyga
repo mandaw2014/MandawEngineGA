@@ -7,10 +7,10 @@ aicme Mandaw:
         féin.airde = airde
         féin.dath = dath
 
-        sdl2.SDL_Init(sdl2.SDL_INIT_EVERYTHING)
+        sdl2.SDL_Init2(sdl2.SDL_INIT_EVERYTHING2)
 
-        féin.fuinneog = sdl2.SDL_CreateWindow(féin.teideal, sdl2.SDL_WINDOWPOS_CENTERED, sdl2.SDL_WINDOWPOS_CENTERED, féin.leithead, féin.airde, sdl2.SDL_WINDOW_SHOWN)
-        féin.rindreálaí = sdl2.SDL_CreateRenderer(féin.fuinneog, -1, 0)
+        féin.fuinneog = sdl2.SDL_CreateWindow2(féin.teideal, sdl2.SDL_WINDOWPOS_CENTERED2, sdl2.SDL_WINDOWPOS_CENTERED2, féin.leithead, féin.airde, sdl2.SDL_WINDOW_SHOWN2)
+        féin.rindreálaí = sdl2.SDL_CreateRenderer2(féin.fuinneog, -1, 0)
 
         féin.ag_rith = 1
         féin.am_delta = 1.0 / 60.0
@@ -31,34 +31,34 @@ aicme Mandaw:
             tarraing()
 
     sain rith(féin):
-        sdl2.SDL_ShowWindow(féin.fuinneog)
+        sdl2.SDL_ShowWindow2(féin.fuinneog)
 
-        current = sdl2.SDL_GetPerformanceCounter()
-        freq = sdl2.SDL_GetPerformanceFrequency()
+        current = sdl2.SDL_GetPerformanceCounter2()
+        freq = sdl2.SDL_GetPerformanceFrequency2()
 
-        imeacht = sdl2.SDL_Event()
+        imeacht = sdl2.SDL_Event2()
 
         chomhfada féin.ag_rith != 0:
-            chomhfada sdl2.SDL_PollEvent(imeacht) != 0:
-                má imeacht.type == sdl2.SDL_Quit:
+            chomhfada sdl2.SDL_PollEvent2(imeacht) != 0:
+                má imeacht.type == sdl2.SDL_Quit2:
                     féin.ag_rith = 0
-                má imeacht.type == sdl2.SDL_KEYDOWN:
-                    má imeacht.key.keysym.sym == sdl2.SDLK_ESCAPE:
+                má imeacht.type == sdl2.SDL_KEYDOWN2:
+                    má imeacht.key.keysym.sym == sdl2.SDLK_ESCAPE2:
                         féin.ag_rith = 0
             
-            nua = sdl2.SDL_GetPerformanceCounter()
+            nua = sdl2.SDL_GetPerformanceCounter2()
             féin._nuashonrú((nua - current) / freq)
             current = nua 
 
-            sdl2.SDL_RenderClear(féin.rindreálaí)
+            sdl2.SDL_RenderClear2(féin.rindreálaí)
             féin._tarraing()
-            sdl2.SDL_SetRenderDrawColor(féin.rindreálaí, féin.dath[0], féin.dath[1], féin.dath[2], féin.dath[3])
-            sdl2.SDL_RenderPresent(féin.rindreálaí)
+            sdl2.SDL_SetRenderDrawColor2(féin.rindreálaí, féin.dath[0], féin.dath[1], féin.dath[2], féin.dath[3])
+            sdl2.SDL_RenderPresent2(féin.rindreálaí)
 
-        sdl2.SDL_DestroyRenderer(féin.rindreálaí)
-        sdl2.SDL_DestroyWindow(féin.fuinneog)
+        sdl2.SDL_DestroyRenderer2(féin.rindreálaí)
+        sdl2.SDL_DestroyWindow2(féin.fuinneog)
         
-        sdl2.SDL_Quit()
+        sdl2.SDL_Quit2()
 
     sain tarraing(féin, fn):
         féin.tarraing_láimhseálaithe.append(fn)
