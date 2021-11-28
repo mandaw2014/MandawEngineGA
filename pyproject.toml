@@ -19,8 +19,8 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.9"
 PySDL2 = "^0.9.9"
-# avantpy-extended = { git = "https://github.com/philtweir/avantpy-extended.git", branch = "master" }
-avantpy-extended = { path = "../avantpy-extended", develop = true }
+"avantpy-trans.sdl2" = "^0.0.2"
+avantpy-extended = "^0.1.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
